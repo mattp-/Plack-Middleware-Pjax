@@ -18,7 +18,7 @@ test_psgi
 psgi_app('<html><title>Hello</title><body><div data-pjax-container>World!</div></body></html>'),
 sub {
     my $cb = shift;
-    my $res = $cb->(GET '/', 'HTTP_X_PJAX' => 'true');
+    my $res = $cb->(GET '/', 'X_PJAX' => 'true');
     is $res->content, '<title>Hello</title>World!', 'should return the title-tag in the body';
 };
 
@@ -26,7 +26,7 @@ test_psgi
 psgi_app('<html><body><div data-pjax-container>World!</div></body></html>'),
 sub {
     my $cb = shift;
-    my $res = $cb->(GET '/', 'HTTP_X_PJAX' => 'true');
+    my $res = $cb->(GET '/', 'X_PJAX' => 'true');
     is $res->content, 'World!', 'should return the inner-html of the pjax-container in the body';
 };
 
@@ -36,7 +36,7 @@ test_psgi
 psgi_app('<html><body><div data-pjax-container><article>World!<img src="test.jpg" /></article></div></body></html>'),
 sub {
     my $cb = shift;
-    my $res = $cb->(GET '/', 'HTTP_X_PJAX' => 'true');
+    my $res = $cb->(GET '/', 'X_PJAX' => 'true');
     is $res->content, '<article>World!<img src="test.jpg" /></article>', 'should handle self closing tags with HTML5 elements';
 
     is $res->header('Content-Length'), length $res->content, 'should return the correct Content Length';
@@ -46,7 +46,7 @@ test_psgi
 psgi_app('<html><body>Has no pjax-container</body></html>'),
 sub {
     my $cb = shift;
-    my $res = $cb->(GET '/', 'HTTP_X_PJAX' => 'true');
+    my $res = $cb->(GET '/', 'X_PJAX' => 'true');
     is $res->content, '<html><body>Has no pjax-container</body></html>', 'should return the original body when there is no pjax-container';
 };
 
@@ -62,7 +62,7 @@ BODY
 ),
 sub {
     my $cb = shift;
-    my $res = $cb->(GET '/', 'HTTP_X_PJAX' => 'true');
+    my $res = $cb->(GET '/', 'X_PJAX' => 'true');
     is $res->content, "\n <p>\nfirst paragraph</p> <p>Second paragraph</p>\n", 'should preserve whitespaces of the original body';
 };
 
@@ -83,7 +83,7 @@ test_psgi
 psgi_app('<html><title>Hello</title><body><div data-foo-container>World!</div></body></html>'),
 sub {
     my $cb = shift;
-    my $res = $cb->(GET '/', 'HTTP_X_PJAX' => 'true', 'HTTP_X_PJAX_CONTAINER' => 'data-foo-container');
+    my $res = $cb->(GET '/', 'X_PJAX' => 'true', 'X_PJAX_CONTAINER' => 'data-foo-container');
     is $res->content, '<title>Hello</title>World!', 'a pjaxified app, upon receiving a non-pjax request should return the correct body';
     is $res->header('Content-Length'), length $res->content, 'should return the correct Content Length';
 };
