@@ -1,6 +1,4 @@
 Revision history for Perl extension Plack-Middleware-Pjax
 
-{{$NEXT}}
-
 1.113390  2011-12-05 06:57:31 Europe/Paris
     - Initial release.
