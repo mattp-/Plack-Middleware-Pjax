@@ -21,7 +21,9 @@ It does this by filtering the generated response through L<Marpa::HTML>. If the 
 
 Although you take a small processing hit adding an html parsing pass into the response cycle, using L<Plack::Middleware::Pjax> saves you from adding any view specific logic in your plack applications.
 
-Thanks to the authors of rack-pjax, as it is the source of inspiration (also docs and tests!) for the creation of this module.
+See demo/ in the dist directory for a plack port of L<http://pjax.heroku.com/>
+
+Thanks to the authors of rack-pjax, as it is the source of inspiration (also docs and tests) for the creation of this module.
 
 =head1 DETAILS
 
