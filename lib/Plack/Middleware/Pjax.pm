@@ -2,7 +2,59 @@ use strict;
 use warnings;
 
 package Plack::Middleware::Pjax;
+# ABSTRACT: PJAX for your Plack
 use parent qw/Plack::Middleware/;
+
+=head1 SYNOPSIS
+
+    use Plack::Builder;
+    builder {
+        enable 'Plack::Middleware::Pjax';
+        $app
+    }
+
+=head1 DESCRIPTION
+
+Plack::Middleware::Pjax adds easy support for serving chromeless pages in combination with jquery-pjax. For more information on what pjax is, check the SEE ALSO links below.
+
+It does this by filtering the generated response through L<Marpa::HTML>. If the x-pjax http header is set, only the title and InnerHTML of the pjax-container are sent to the client.
+
+Although you take a small processing hit adding an html parsing pass into the response cycle, using L<Plack::Middleware::Pjax> saves you from adding any view specific logic in your plack applications.
+
+Thanks to the authors of rack-pjax, as it is the source of inspiration (also docs and tests!) for the creation of this module.
+
+=head1 DETAILS
+
+    <head>
+      ...
+      <script src="/javascripts/jquery.js"></script>
+      <script src="/javascripts/jquery.pjax.js"></script>
+      <script type="text/javascript">
+        $(function(){
+          $('a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])').pjax('[data-pjax-container]')
+        })
+      </script>
+      ...
+    </head>
+    <body>
+      <div data-pjax-container>
+        ...
+      </div>
+    </body>
+
+Include the above in your applications layout wrapper. When any link is hit with a <pushstate|http://caniuse.com/#search=pushstate/> enabled browser, L<Plack::Middleware::Pjax> will turn a fragment like:
+    <title>foo</title>
+    bar baz
+
+=head1 SEE ALSO
+
+=for :list
+* L<https://github.com/eval/rack-pjax>
+* L<Marpa::HTML>
+* L<http://pjax.heroku.com/>
+* L<https://github.com/defunkt/jquery-pjax>
+
+=cut
 
 use Plack::Util;
 use Plack::Request;
