@@ -44,7 +44,8 @@ Thanks to the authors of rack-pjax, as it is the source of inspiration (also doc
       </div>
     </body>
 
-Include the above in your applications layout wrapper. When any link is hit with a <pushstate|http://caniuse.com/#search=pushstate/> enabled browser, L<Plack::Middleware::Pjax> will turn a fragment like:
+Include the above in your applications layout wrapper. When any link is hit with a L<pushstate|http://caniuse.com/#search=pushstate/> enabled browser, L<Plack::Middleware::Pjax> will return a fragment like:
+
     <title>foo</title>
     bar baz
 
