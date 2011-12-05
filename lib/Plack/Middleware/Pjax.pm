@@ -17,9 +17,8 @@ sub call {
         my $req = Plack::Request->new($env);
         my $res = shift;
 
-        return unless defined $req->header('HTTP_X_PJAX');
-
-        my $tag = $req->header('HTTP_X_PJAX_CONTAINER') || 'data-pjax-container';
+        return unless defined $req->header('x-pjax');
+        my $tag = $req->header('x-pjax-container') || 'data-pjax-container';
 
         my $body = [];
         Plack::Util::foreach($res->[2], sub { push @$body, $_[0]; });
