@@ -1,10 +1,12 @@
 Build.PL
 Changes
+DZP-git.FbYU
 LICENSE
 MANIFEST
 META.json
 META.yml
 README
+README.mkdn
 demo/demo.pl
 demo/static/img/aliens.jpg
 demo/static/jquery.cookie.js
@@ -26,3 +28,4 @@ t/release-kwalitee.t
 t/release-minimum-version.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
+weaver.ini

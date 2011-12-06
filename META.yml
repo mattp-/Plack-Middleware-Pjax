@@ -23,7 +23,7 @@ name: Plack-Middleware-Pjax
 provides:
   Plack::Middleware::Pjax:
     file: lib/Plack/Middleware/Pjax.pm
-    version: 1.113390
+    version: 1.113400
 requires:
   Marpa::HTML: 0
   Plack::Middleware: 0
@@ -36,7 +36,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Plack-Middleware-Pjax
   homepage: http://search.cpan.org/dist/Plack-Middleware-Pjax/
   repository: https://github.com/mphill22/Plack-Middleware-Pjax.git
-version: 1.113390
+version: 1.113400
 x_Dist_Zilla:
   plugins:
     -
@@ -63,6 +63,10 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::TestRelease
       name: TestRelease
       version: 4.300003
+    -
+      class: Dist::Zilla::Plugin::ReadmeMarkdownFromPod
+      name: ReadmeMarkdownFromPod
+      version: 0.103510
     -
       class: Dist::Zilla::Plugin::AutoVersion
       name: '@Filter/AutoVersion'

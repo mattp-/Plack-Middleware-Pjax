@@ -24,7 +24,7 @@ my %module_build_args = (
     "Matthew Phillips <mattp\@cpan.org>"
   ],
   "dist_name" => "Plack-Middleware-Pjax",
-  "dist_version" => "1.113390",
+  "dist_version" => "1.113400",
   "license" => "perl",
   "module_name" => "Plack::Middleware::Pjax",
   "recommends" => {},

@@ -11,7 +11,7 @@ use warnings;
 
 package Plack::Middleware::Pjax;
 {
-  $Plack::Middleware::Pjax::VERSION = '1.113390';
+  $Plack::Middleware::Pjax::VERSION = '1.113400';
 }
 # ABSTRACT: PJAX for your Plack
 use parent qw/Plack::Middleware/;
@@ -75,7 +75,7 @@ Plack::Middleware::Pjax - PJAX for your Plack
 
 =head1 VERSION
 
-version 1.113390
+version 1.113400
 
 =head1 SYNOPSIS
 
@@ -116,16 +116,32 @@ Thanks to the authors of rack-pjax, as it is the source of inspiration (also doc
       </div>
     </body>
 
-Include the above in your applications layout wrapper. When any link is hit with a <pushstate|http://caniuse.com/#search=pushstate/> enabled browser, L<Plack::Middleware::Pjax> will turn a fragment like:
+Include the above in your applications layout wrapper. When any link is hit with a L<pushstate|http://caniuse.com/#search=pushstate/> enabled browser, L<Plack::Middleware::Pjax> will return a fragment like:
+
     <title>foo</title>
     bar baz
 
 =head1 SEE ALSO
 
-=for :list * L<https://github.com/eval/rack-pjax>
-* L<Marpa::HTML>
-* L<http://pjax.heroku.com/>
-* L<https://github.com/defunkt/jquery-pjax>
+=over 4
+
+=item *
+
+L<https://github.com/eval/rack-pjax>
+
+=item *
+
+L<Marpa::HTML>
+
+=item *
+
+L<http://pjax.heroku.com/>
+
+=item *
+
+L<https://github.com/defunkt/jquery-pjax>
+
+=back
 
 =head1 AUTHOR
 
