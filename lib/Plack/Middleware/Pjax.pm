@@ -17,7 +17,7 @@ use parent qw/Plack::Middleware/;
 
 Plack::Middleware::Pjax adds easy support for serving chromeless pages in combination with jquery-pjax. For more information on what pjax is, check the SEE ALSO links below.
 
-It does this by filtering the generated response through L<Marpa::HTML>. If the x-pjax http header is set, only the title and InnerHTML of the pjax-container are sent to the client.
+It does this by filtering the generated response through L<Marpa::R2::HTML>. If the x-pjax http header is set, only the title and InnerHTML of the pjax-container are sent to the client.
 
 Although you take a small processing hit adding an html parsing pass into the response cycle, using L<Plack::Middleware::Pjax> saves you from adding any view specific logic in your plack applications.
 
@@ -53,7 +53,7 @@ Include the above in your applications layout wrapper. When any link is hit with
 
 =for :list
 * L<https://github.com/eval/rack-pjax>
-* L<Marpa::HTML>
+* L<Marpa::R2::HTML>
 * L<http://pjax.heroku.com/>
 * L<https://github.com/defunkt/jquery-pjax>
 
@@ -61,7 +61,7 @@ Include the above in your applications layout wrapper. When any link is hit with
 
 use Plack::Util;
 use Plack::Request;
-use Marpa::HTML;
+use Marpa::R2::HTML;
 
 sub call {
     my ($self, $env) = @_;
@@ -79,17 +79,17 @@ sub call {
         Plack::Util::foreach($res->[2], sub { push @$body, $_[0]; });
         $body = join '', @$body;
 
-        my $stripped = Marpa::HTML::html( \$body,{
+        my $stripped = Marpa::R2::HTML::html( \$body,{
             q{*} => sub {
-                if (Marpa::HTML::attributes()->{$tag}) {
-                    push @{$Marpa::HTML::INSTANCE->{stripped}}, Marpa::HTML::contents();
+                if (Marpa::R2::HTML::attributes()->{$tag}) {
+                    push @{$Marpa::R2::HTML::INSTANCE->{stripped}}, Marpa::R2::HTML::contents();
                 }
             },
             q{title} => sub {
-                unshift @{$Marpa::HTML::INSTANCE->{stripped}}, Marpa::HTML::original();
+                unshift @{$Marpa::R2::HTML::INSTANCE->{stripped}}, Marpa::R2::HTML::original();
             },
             ':TOP' => sub {
-                $Marpa::HTML::INSTANCE->{stripped} || [];
+                $Marpa::R2::HTML::INSTANCE->{stripped} || [];
             }
         });
 
